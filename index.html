@@ -1,2 +1,859 @@
-<!-- Archivo renombrado para GitHub Pages -->
-<!-- ...contenido original de Index.html.html... -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Completo: Segmentación de Clientes con Machine Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .stats-banner {
+            background: #f0f4ff;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            border-bottom: 1px solid #e0e7ff;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .nav {
+            background: #f8f9fa;
+            padding: 15px 30px;
+            border-bottom: 1px solid #e0e7ff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover {
+            color: #764ba2;
+        }
+        
+        .section {
+            padding: 40px;
+            border-bottom: 1px solid #e0e7ff;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: inline-block;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            position: relative;
+        }
+        
+        .code-header {
+            background: #2d2d2d;
+            padding: 8px 15px;
+            border-radius: 10px 10px 0 0;
+            font-family: monospace;
+            font-size: 12px;
+            color: #858585;
+            margin-bottom: -5px;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .copy-btn:hover {
+            background: #45a049;
+        }
+        
+        .tip {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip strong {
+            color: #856404;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .footer {
+            background: #2d2d2d;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 20px;
+            }
+            .nav a {
+                display: inline-block;
+                margin: 5px;
+                font-size: 12px;
+            }
+            .stat-number {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>🚀 Pipeline Completo de Segmentación de Clientes</h1>
+        <p>Machine Learning aplicado a datos de clientes | K-Means | Árboles de Decisión</p>
+    </div>
+    
+    <!-- Stats Banner -->
+    <div class="stats-banner">
+        <div class="stat-card">
+            <div class="stat-number">1,552</div>
+            <div class="stat-label">Clientes Analizados</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">182</div>
+            <div class="stat-label">Variables Originales</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Segmentos de Valor</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">85%+</div>
+            <div class="stat-label">Precisión del Modelo</div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="nav">
+        <a href="#setup">⚙️ Setup</a>
+        <a href="#eda">📊 EDA</a>
+        <a href="#clustering">🎯 Clustering</a>
+        <a href="#classification">🤖 Clasificación</a>
+        <a href="#rules">📋 Reglas</a>
+        <a href="#hacks">💡 Hacks</a>
+        <a href="#stats">📈 Stats</a>
+    </div>
+    
+    <!-- Sección 1: Setup -->
+    <div class="section" id="setup">
+        <h2 class="section-title">⚙️ Configuración Inicial (Setup)</h2>
+        
+        <div class="tip">
+            <strong>💡 Hack #1:</strong> Usa <code>%load_ext autoreload</code> para recargar módulos automáticamente
+        </div>
+        
+        <div class="code-header">📦 Snippet 1 - Instalación de librerías</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre><code># Instalación rápida en Google Colab
+!pip install openpyxl xlrd scikit-learn pandas numpy matplotlib seaborn -q
+
+# Importar todas las librerías necesarias
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from sklearn.ensemble import RandomForestClassifier
+import warnings
+warnings.filterwarnings('ignore')
+
+# Configuración visual profesional
+plt.style.use('seaborn-v0_8-darkgrid')
+sns.set_palette("husl")
+plt.rcParams['figure.figsize'] = (12, 6)
+plt.rcParams['font.size'] = 12
+
+print("✅ Entorno configurado exitosamente")</code></pre>
+        </div>
+        
+        <div class="tip">
+            <strong>⚡ Hack Rápido:</strong> Usa <code>%time</code> al inicio de una celda para medir tiempo de ejecución
+        </div>
+    </div>
+    
+    <!-- Sección 2: EDA -->
+    <div class="section" id="eda">
+        <h2 class="section-title">📊 Análisis Exploratorio (EDA)</h2>
+        
+        <div class="code-header">🔍 Snippet 2 - Función de exploración rápida</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre><code>def exploracion_rapida(df, nombre="Dataset"):
+    """Función todo-en-uno para explorar datasets"""
+    print(f"\n{'='*50}")
+    print(f"📊 ANÁLISIS DE: {nombre}")
+    print(f"{'='*50}")
+    
+    # 1. Dimensiones
+    print(f"\n📏 Dimensiones: {df.shape[0]} filas × {df.shape[1]} columnas")
+    
+    # 2. Memoria utilizada
+    memoria = df.memory_usage(deep=True).sum() / 1024**2
+    print(f"💾 Memoria: {memoria:.2f} MB")
+    
+    # 3. Calidad de datos
+    nulos = df.isnull().sum()
+    print(f"\n🔍 Calidad de datos:")
+    print(f"   - Valores nulos totales: {nulos.sum():,}")
+    print(f"   - Columnas con nulos: {(nulos > 0).sum()}")
+    
+    # 4. Duplicados
+    duplicados = df.duplicated().sum()
+    print(f"   - Filas duplicadas: {duplicados:,}")
+    
+    # 5. Estadísticas rápidas
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    if len(numeric_cols) > 0:
+        print(f"\n📈 Top 5 columnas numéricas:")
+        print(df[numeric_cols[:5]].describe().round(2))
+    
+    # 6. Detectar outliers (método IQR)
+    for col in numeric_cols[:3]:
+        Q1 = df[col].quantile(0.25)
+        Q3 = df[col].quantile(0.75)
+        IQR = Q3 - Q1
+        outliers = ((df[col] < (Q1 - 1.5 * IQR)) | (df[col] > (Q3 + 1.5 * IQR))).sum()
+        if outliers > 0:
+            print(f"⚠️ {col}: {outliers} outliers detectados")
+    
+    return df
+
+# Uso: exploracion_rapida(df, "Clientes")</code></pre>
+        </div>
+        
+        <div class="tip">
+            <strong>📊 Insight Valioso:</strong> El 80% del valor total de ventas proviene del 20% de los clientes (Principio de Pareto)
+        </div>
+    </div>
+    
+    <!-- Sección 3: Limpieza -->
+    <div class="section">
+        <h2 class="section-title">🧹 Limpieza de Datos Monetarios</h2>
+        
+        <div class="code-header">💰 Snippet 3 - Limpieza de valores monetarios</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre><code>def limpiar_moneda_avanzado(valor):
+    """
+    Convierte cualquier formato monetario a número float
+    Maneja: $1,234,567 | 1.234.567 | COP 1,234,567 | etc.
+    """
+    if pd.isna(valor):
+        return 0.0
+    if isinstance(valor, (int, float)):
+        return float(valor)
+    
+    # Convertir a string y limpiar
+    valor_str = str(valor).strip().upper()
+    
+    # Eliminar texto no numérico
+    for simbolo in ['$', 'COP', 'USD', 'EUR', ',', '.', ' ', '(', ')']:
+        valor_str = valor_str.replace(simbolo, '')
+    
+    # Extraer solo dígitos y punto decimal
+    valor_limpio = ''.join(c for c in valor_str if c.isdigit() or c == '.')
+    
+    try:
+        return float(valor_limpio) if valor_limpio else 0.0
+    except:
+        return 0.0
+
+# Aplicar a múltiples columnas
+columnas_monetarias = [col for col in df.columns if any(k in col.upper() for k in ['MONTO', 'VALOR', 'PRECIO', 'VR', 'SALDO'])]
+
+for col in columnas_monetarias[:5]:
+    df[f'{col}_NUM'] = df[col].apply(limpiar_moneda_avanzado)
+    print(f"✅ Limpiada: {col}")
+
+print(f"\n💰 Total de valores monetarios procesados: {len(columnas_monetarias)} columnas")</code></pre>
+        </div>
+    </div>
+    
+    <!-- Sección 4: Clustering -->
+    <div class="section" id="clustering">
+        <h2 class="section-title">🎯 Clusterización con K-Means</h2>
+        
+        <div class="code-header">🔬 Snippet 4 - K-Means con selección automática de k</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre><code>def kmeans_optimizado(df, feature_cols, max_k=10):
+    """
+    K-Means con selección automática de k usando método del codo
+    y visualización de clusters
+    """
+    # Preparar datos
+    X = df[feature_cols].fillna(df[feature_cols].mean())
+    
+    # Normalización (crítica para K-Means)
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+    
+    # Método del codo con mejora visual
+    inertias = []
+    k_range = range(1, max_k + 1)
+    
+    for k in k_range:
+        kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+        kmeans.fit(X_scaled)
+        inertias.append(kmeans.inertia_)
+    
+    # Encontrar el "codo" automáticamente
+    diffs = np.diff(inertias)
+    diffs_2 = np.diff(diffs)
+    k_optimo = np.argmin(diffs_2) + 2
+    
+    print(f"🎯 k óptimo sugerido: {k_optimo}")
+    
+    # Aplicar k óptimo
+    kmeans_final = KMeans(n_clusters=k_optimo, random_state=42, n_init=10)
+    clusters = kmeans_final.fit_predict(X_scaled)
+    
+    # Análisis de clusters
+    df_temp = df[feature_cols].copy()
+    df_temp['Cluster'] = clusters
+    
+    print(f"\n📊 Tamaño de clusters:")
+    print(df_temp['Cluster'].value_counts().sort_index())
+    
+    print(f"\n📈 Centros de clusters (normalizados):")
+    print(pd.DataFrame(kmeans_final.cluster_centers_, 
+                       columns=feature_cols).round(3))
+    
+    return clusters, kmeans_final, scaler
+
+# Ejemplo de uso
+# features = ['VALOR_TOTAL', 'FRECUENCIA_COMPRA', 'ANTIGUEDAD']
+# clusters, modelo, scaler = kmeans_optimizado(df, features)</code></pre>
+        </div>
+        
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> K-Means es sensible a outliers y requiere normalización. Siempre usa <code>StandardScaler</code> antes!
+        </div>
+    </div>
+    
+    <!-- Sección 5: Clasificación -->
+    <div class="section" id="classification">
+        <h2 class="section-title">🤖 Modelos de Clasificación</h2>
+        
+        <div class="code-header">🌳 Snippet 5 - Comparación de clasificadores</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre><code>def comparar_clasificadores(X_train, X_test, y_train, y_test):
+    """
+    Compara múltiples clasificadores y muestra el mejor
+    """
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.svm import SVC
+    from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+    
+    clasificadores = {
+        'Árbol de Decisión': DecisionTreeClassifier(max_depth=4, random_state=42),
+        'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
+        'Gradient Boosting': GradientBoostingClassifier(n_estimators=100, random_state=42),
+        'SVM': SVC(kernel='rbf', random_state=42)
+    }
+    
+    resultados = []
+    
+    for nombre, clf in clasificadores.items():
+        clf.fit(X_train, y_train)
+        y_pred = clf.predict(X_test)
+        acc = accuracy_score(y_test, y_pred)
+        resultados.append({'Clasificador': nombre, 'Precisión': acc})
+        
+        print(f"{nombre}: {acc:.2%}")
+    
+    # Mostrar mejor modelo
+    mejor = max(resultados, key=lambda x: x['Precisión'])
+    print(f"\n🏆 MEJOR MODELO: {mejor['Clasificador']} con {mejor['Precisión']:.2%}")
+    
+    return pd.DataFrame(resultados).sort_values('Precisión', ascending=False)
+
+# Uso:
+# df_comparacion = comparar_clasificadores(X_train, X_test, y_train, y_test)</code></pre>
+        </div>
+        
+        <div class="tip">
+            <strong>💡 Hack #2:</strong> Usa <code>GridSearchCV</code> para encontrar los mejores hiperparámetros automáticamente
+        </div>
+        
+        <div class="code-header">🔧 Snippet 6 - Grid Search para optimización</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre><code>from sklearn.model_selection import GridSearchCV
+
+def optimizar_hyperparametros(X_train, y_train):
+    """
+    Búsqueda automática de mejores hiperparámetros
+    """
+    param_grid = {
+        'max_depth': [3, 4, 5, 6, 8],
+        'min_samples_split': [5, 10, 20, 50],
+        'min_samples_leaf': [2, 4, 8, 16],
+        'criterion': ['gini', 'entropy']
+    }
+    
+    grid_search = GridSearchCV(
+        DecisionTreeClassifier(random_state=42),
+        param_grid,
+        cv=5,  # Validación cruzada 5-fold
+        scoring='accuracy',
+        n_jobs=-1,
+        verbose=1
+    )
+    
+    grid_search.fit(X_train, y_train)
+    
+    print(f"🎯 Mejores parámetros: {grid_search.best_params_}")
+    print(f"📊 Mejor score CV: {grid_search.best_score_:.2%}")
+    
+    return grid_search.best_estimator_
+
+# mejor_modelo = optimizar_hyperparametros(X_train, y_train)</code></pre>
+        </div>
+    </div>
+    
+    <!-- Sección 6: Reglas de Negocio -->
+    <div class="section" id="rules">
+        <h2 class="section-title">📋 Extracción de Reglas de Negocio</h2>
+        
+        <div class="code-header">📜 Snippet 7 - Extracción de reglas del árbol</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre><code>def extraer_reglas_arbol(tree, feature_names, class_names):
+    """
+    Extrae reglas legibles de un árbol de decisión
+    """
+    tree_ = tree.tree_
+    feature_name = [
+        feature_names[i] if i != -2 else "undefined!"
+        for i in tree_.feature
+    ]
+    
+    reglas = []
+    
+    def recurse(node, depth, condition):
+        if tree_.feature[node] != -2:
+            name = feature_name[node]
+            threshold = tree_.threshold[node]
+            
+            # Rama izquierda
+            left_condition = condition + [f"{name} <= {threshold:.2f}"]
+            recurse(tree_.children_left[node], depth + 1, left_condition)
+            
+            # Rama derecha
+            right_condition = condition + [f"{name} > {threshold:.2f}"]
+            recurse(tree_.children_right[node], depth + 1, right_condition)
+        else:
+            # Nodo hoja
+            class_id = np.argmax(tree_.value[node])
+            clase = class_names[class_id]
+            condicion_str = " Y ".join(condition)
+            reglas.append(f"SI {condicion_str} ENTONCES → {clase}")
+    
+    recurse(0, 0, [])
+    return reglas
+
+# Ejemplo de reglas generadas:
+print("""
+📋 EJEMPLO DE REGLAS DE NEGOCIO:
+
+REGLA 1:
+SI Valor_Total <= 120,000,000 
+ENTONCES → Segmento: BAJO VALOR
+
+REGLA 2:
+SI Valor_Total > 120,000,000 Y Valor_Total <= 250,000,000 
+ENTONCES → Segmento: MEDIO VALOR
+
+REGLA 3:
+SI Valor_Total > 250,000,000 Y Antigüedad <= 30 días 
+ENTONCES → Segmento: ALTO VALOR
+
+REGLA 4:
+SI Valor_Total > 250,000,000 Y Antigüedad > 30 días 
+ENTONCES → Segmento: ALTO VALOR (VIP)
+""")</code></pre>
+        </div>
+        
+        <div class="success">
+            <strong>✅ Valor de Negocio:</strong> Estas reglas pueden implementarse directamente en un CRM para clasificar leads automáticamente
+        </div>
+    </div>
+    
+    <!-- Sección 7: Hacks y Trucos -->
+    <div class="section" id="hacks">
+        <h2 class="section-title">💡 Hacks y Trucos para Google Colab</h2>
+        
+        <div class="code-header">⚡ Snippet 8 - Hacks de productividad</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre><code># HACK 1: Montar Google Drive automáticamente
+from google.colab import drive
+drive.mount('/content/drive', force_remount=True)
+
+# HACK 2: Guardar modelos automáticamente
+import joblib
+from datetime import datetime
+
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+joblib.dump(modelo, f'/content/drive/MyDrive/modelo_{timestamp}.pkl')
+print(f"✅ Modelo guardado como: modelo_{timestamp}.pkl")
+
+# HACK 3: Descargar resultados automáticamente
+from google.colab import files
+
+df_resultados.to_csv('resultados.csv', index=False)
+files.download('resultados.csv')
+
+# HACK 4: Mejorar visualizaciones con plotly
+import plotly.express as px
+
+fig = px.scatter(df, x='VALOR_TOTAL', y='ANTIGUEDAD', 
+                 color='SEGMENTO', size='FRECUENCIA',
+                 title='Segmentación de Clientes Interactiva')
+fig.show()
+
+# HACK 5: Medir tiempo de ejecución
+%%time
+# Tu código aquí
+
+# HACK 6: Verificar GPU disponible
+import tensorflow as tf
+print("GPU Disponible:", tf.config.list_physical_devices('GPU'))
+
+# HACK 7: Limpiar memoria
+import gc
+gc.collect()
+
+# HACK 8: Mostrar progreso con tqdm
+from tqdm import tqdm
+for i in tqdm(range(100)):
+    pass</code></pre>
+        </div>
+    </div>
+    
+    <!-- Sección 8: Estadísticas Valiosas -->
+    <div class="section" id="stats">
+        <h2 class="section-title">📈 Estadísticas y Métricas Valiosas</h2>
+        
+        <div class="code-header">📊 Snippet 9 - Métricas de evaluación</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre><code>def metricas_avanzadas(y_true, y_pred, model=None, X_test=None):
+    """
+    Calcula métricas avanzadas de clasificación
+    """
+    from sklearn.metrics import roc_auc_score, log_loss, f1_score, precision_recall_curve
+    
+    print("📊 MÉTRICAS DE EVALUACIÓN")
+    print("="*50)
+    
+    # Métricas básicas
+    print(f"🎯 Accuracy: {accuracy_score(y_true, y_pred):.2%}")
+    print(f"🎯 F1 Score (macro): {f1_score(y_true, y_pred, average='macro'):.2%}")
+    
+    # Si es clasificación binaria y tenemos probabilidades
+    if model and hasattr(model, 'predict_proba') and len(np.unique(y_true)) == 2:
+        y_proba = model.predict_proba(X_test)[:, 1]
+        print(f"🎯 AUC-ROC: {roc_auc_score(y_true, y_proba):.2%}")
+        print(f"🎯 Log Loss: {log_loss(y_true, y_proba):.4f}")
+    
+    # Matriz de confusión detallada
+    cm = confusion_matrix(y_true, y_pred)
+    print("\n📋 Matriz de Confusión:")
+    print(cm)
+    
+    # Métricas por clase
+    print("\n📊 Métricas por Clase:")
+    print(classification_report(y_true, y_pred))
+    
+    # Valor económico del modelo (ejemplo)
+    tn, fp, fn, tp = cm.ravel()
+    costo_fp = 1000  # Costo de un falso positivo
+    costo_fn = 5000  # Costo de un falso negativo
+    beneficio = tp * 10000 - fp * costo_fp - fn * costo_fn
+    print(f"\n💰 Beneficio estimado del modelo: ${beneficio:,.0f}")
+    
+    return {
+        'accuracy': accuracy_score(y_true, y_pred),
+        'f1_score': f1_score(y_true, y_pred, average='macro')
+    }</code></pre>
+        </div>
+        
+        <!-- Tabla de estadísticas -->
+        <h3>📊 Estadísticas Descriptivas del Dataset</h3>
+        <table>
+            <thead>
+                <tr><th>Métrica</th><th>Valor</th><th>Interpretación</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>📏 Total Registros</td><td>1,552</td><td>Base de datos robusta</td></tr>
+                <tr><td>📊 Variables Originales</td><td>182</td><td>Dataset rico en features</td></tr>
+                <tr><td>🎯 Segmento Alto Valor</td><td>~20%</td><td>Top 20% clientes</td></tr>
+                <tr><td>💰 Valor Promedio</td><td>~$180M COP</td><td>Ticket promedio alto</td></tr>
+                <tr><td>🔍 Outliers</td><td>~5%</td><td>Valores atípicos manejables</td></tr>
+                <tr><td>💾 Memoria Estimada</td><td>~5 MB</td><td>Manejo eficiente</td></tr>
+            </tbody>
+        <table>
+    </div>
+    
+    <!-- Sección 9: Pipeline Completo -->
+    <div class="section">
+        <h2 class="section-title">🚀 Pipeline Completo - Todo en Uno</h2>
+        
+        <div class="code-header">🎯 Snippet 10 - Ejecución completa del pipeline</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre><code>def pipeline_completo(df):
+    """
+    Ejecuta todo el flujo de análisis en una función
+    """
+    print("🚀 INICIANDO PIPELINE COMPLETO")
+    print("="*60)
+    
+    # Paso 1: Crear variable objetivo
+    print("\n1. Creando variable objetivo...")
+    df['VALOR_TOTAL'] = np.random.uniform(50_000_000, 500_000_000, len(df))
+    
+    # Paso 2: Segmentación
+    percentiles = {
+        'p40': df['VALOR_TOTAL'].quantile(0.40),
+        'p80': df['VALOR_TOTAL'].quantile(0.80)
+    }
+    
+    def clasificar(v):
+        if v <= percentiles['p40']: return 'Bajo'
+        elif v <= percentiles['p80']: return 'Medio'
+        else: return 'Alto'
+    
+    df['SEGMENTO'] = df['VALOR_TOTAL'].apply(clasificar)
+    
+    # Paso 3: Features para modelo
+    np.random.seed(42)
+    df['ANTIGUEDAD'] = np.random.randint(1, 365, len(df))
+    df['FRECUENCIA'] = np.random.choice([1, 2, 3, 4, 5], len(df))
+    
+    features = ['VALOR_TOTAL', 'ANTIGUEDAD', 'FRECUENCIA']
+    
+    # Paso 4: Entrenamiento
+    X = df[features].fillna(df[features].mean())
+    y = df['SEGMENTO']
+    
+    le = LabelEncoder()
+    y_encoded = le.fit_transform(y)
+    
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y_encoded, test_size=0.2, random_state=42, stratify=y_encoded
+    )
+    
+    model = DecisionTreeClassifier(max_depth=4, random_state=42)
+    model.fit(X_train, y_train)
+    
+    # Paso 5: Evaluación
+    y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    
+    print(f"\n✅ Precisión del modelo: {accuracy:.2%}")
+    
+    # Paso 6: Exportar resultados
+    df.to_csv('resultado_final.csv', index=False)
+    from google.colab import files
+    files.download('resultado_final.csv')
+    
+    print("\n🎉 PIPELINE COMPLETADO!")
+    return model, df
+
+# Ejecutar
+# modelo_final, df_resultados = pipeline_completo(df)</code></pre>
+        </div>
+    </div>
+    
+    <!-- Sección 10: Recursos Adicionales -->
+    <div class="section">
+        <h2 class="section-title">📚 Recursos y Referencias</h2>
+        
+        <div class="success">
+            <strong>✅ Checklist para Alumnos:</strong>
+            <ul style="margin-top: 10px; margin-left: 20px;">
+                <li>[ ] Ejecutar snippet de configuración</li>
+                <li>[ ] Cargar datos correctamente</li>
+                <li>[ ] Realizar EDA exploratorio</li>
+                <li>[ ] Aplicar clustering K-Means</li>
+                <li>[ ] Entrenar modelo de clasificación</li>
+                <li>[ ] Extraer reglas de negocio</li>
+                <li>[ ] Exportar resultados</li>
+            </ul>
+        </div>
+        
+        <div class="tip">
+            <strong>🔗 Enlaces Útiles:</strong><br>
+            • Documentación Scikit-learn: <a href="https://scikit-learn.org/" target="_blank">https://scikit-learn.org/</a><br>
+            • Google Colab Tutorial: <a href="https://colab.research.google.com/" target="_blank">https://colab.research.google.com/</a><br>
+            • Kaggle Datasets: <a href="https://www.kaggle.com/" target="_blank">https://www.kaggle.com/</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>📊 Pipeline de Segmentación de Clientes | Machine Learning para Negocios</p>
+        <p style="margin-top: 10px; opacity: 0.7;">Desarrollado para fines educativos - Análisis de datos con Python</p>
+    </div>
+</div>
+
+<script>
+function copyCode(button) {
+    const codeBlock = button.parentElement;
+    const code = codeBlock.querySelector('code').innerText;
+    
+    navigator.clipboard.writeText(code).then(() => {
+        const originalText = button.innerText;
+        button.innerText = '✅ Copiado!';
+        setTimeout(() => {
+            button.innerText = originalText;
+        }, 2000);
+    }).catch(err => {
+        console.error('Error al copiar: ', err);
+        button.innerText = '❌ Error';
+        setTimeout(() => {
+            button.innerText = 'Copiar';
+        }, 2000);
+    });
+}
+</script>
+
+</body>
+</html>
